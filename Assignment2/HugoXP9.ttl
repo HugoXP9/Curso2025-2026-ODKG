@@ -1,0 +1,165 @@
+@prefix ex: <https://example.org/madrid-gardens#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix schema: <http://schema.org/> .
+@prefix wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+####################################################################
+# Ontology metadata
+####################################################################
+ex: a rdfs:Resource ;
+  rdfs:label "Madrid Urban Gardens vocabulary"@en ;
+  dcterms:description "RDF/RDFS model for urban gardens in Madrid (community, school and municipal)."@en ;
+  dcterms:source <https://geoportal.madrid.es/IDEAM_WBGEOPORTAL/dataset.iam?id=00000010-b145-11ea-a01e-ecb1d753f6e8> ;
+  dcterms:creator "yourGitHubUser" .
+
+####################################################################
+# Classes
+####################################################################
+ex:UrbanGarden a rdfs:Class ;
+  rdfs:label "Urban garden"@en ;
+  rdfs:comment "Any urban garden located in the city of Madrid."@en .
+
+ex:CommunityGarden a rdfs:Class ;
+  rdfs:subClassOf ex:UrbanGarden ;
+  rdfs:label "Community garden"@en ;
+  rdfs:comment "Urban garden managed by neighborhood/community associations."@en .
+
+ex:SchoolGarden a rdfs:Class ;
+  rdfs:subClassOf ex:UrbanGarden ;
+  rdfs:label "School garden"@en ;
+  rdfs:comment "Urban garden hosted by a school."@en .
+
+ex:MunicipalGarden a rdfs:Class ;
+  rdfs:subClassOf ex:UrbanGarden ;
+  rdfs:label "Municipal garden"@en ;
+  rdfs:comment "Urban garden managed directly by the city council."@en .
+
+ex:District a rdfs:Class ;
+  rdfs:label "District"@en ;
+  rdfs:comment "Administrative district of Madrid."@en .
+
+ex:ManagementBody a rdfs:Class ;
+  rdfs:label "Management body"@en ;
+  rdfs:comment "Organization managing an urban garden (association, school, municipal unit)."@en .
+
+ex:WaterSource a rdfs:Class ;
+  rdfs:label "Water source"@en ;
+  rdfs:comment "Type of water source used for irrigation (tap, well, etc.)."@en .
+
+####################################################################
+# Properties
+####################################################################
+ex:locatedIn a rdf:Property ;
+  rdfs:label "located in"@en ;
+  rdfs:domain ex:UrbanGarden ;
+  rdfs:range ex:District ;
+  rdfs:comment "Administrative district where the garden is located."@en .
+
+ex:managedBy a rdf:Property ;
+  rdfs:label "managed by"@en ;
+  rdfs:domain ex:UrbanGarden ;
+  rdfs:range ex:ManagementBody ;
+  rdfs:comment "Organization that manages the garden."@en .
+
+ex:waterSource a rdf:Property ;
+  rdfs:label "water source"@en ;
+  rdfs:domain ex:UrbanGarden ;
+  rdfs:range ex:WaterSource ;
+  rdfs:comment "Main water source used by the garden."@en .
+
+ex:hasAreaM2 a rdf:Property ;
+  rdfs:label "area (m2)"@en ;
+  rdfs:domain ex:UrbanGarden ;
+  rdfs:range xsd:decimal ;
+  rdfs:comment "Approximate surface in square meters."@en .
+
+ex:hasPlots a rdf:Property ;
+  rdfs:label "number of plots"@en ;
+  rdfs:domain ex:UrbanGarden ;
+  rdfs:range xsd:integer ;
+  rdfs:comment "Number of individual cultivation plots."@en .
+
+ex:hasInceptionYear a rdf:Property ;
+  rdfs:label "inception year"@en ;
+  rdfs:domain ex:UrbanGarden ;
+  rdfs:range xsd:gYear ;
+  rdfs:comment "Year when the garden started operating."@en .
+
+# Link to WGS84 properties (datatype properties)
+wgs84:lat a rdf:Property ;
+  rdfs:label "latitude"@en ;
+  rdfs:domain ex:UrbanGarden ;
+  rdfs:range xsd:decimal .
+
+wgs84:long a rdf:Property ;
+  rdfs:label "longitude"@en ;
+  rdfs:domain ex:UrbanGarden ;
+  rdfs:range xsd:decimal .
+
+####################################################################
+# Controlled vocabulary for water sources
+####################################################################
+ex:Tap a ex:WaterSource ; rdfs:label "Tap/Network"@en .
+ex:Well a ex:WaterSource ; rdfs:label "Well"@en .
+ex:Fountain a ex:WaterSource ; rdfs:label "Public fountain"@en .
+
+####################################################################
+# District examples (subset)
+####################################################################
+ex:Centro a ex:District ; rdfs:label "Centro"@en .
+ex:Retiro a ex:District ; rdfs:label "Retiro"@en .
+ex:MoncloaAravaca a ex:District ; rdfs:label "Moncloa-Aravaca"@en .
+
+####################################################################
+# Example garden instances
+####################################################################
+ex:EsteOeste_Garden a ex:CommunityGarden ;
+  rdfs:label "Este-Oeste Community Garden"@en ;
+  ex:locatedIn ex:Centro ;
+  ex:managedBy ex:AV_BarrioCentro ;
+  ex:waterSource ex:Fountain ;
+  ex:hasAreaM2 "1200"^^xsd:decimal ;
+  ex:hasPlots "25"^^xsd:integer ;
+  ex:hasInceptionYear "2017"^^xsd:gYear ;
+  wgs84:lat "40.4167"^^xsd:decimal ;
+  wgs84:long "-3.7033"^^xsd:decimal ;
+  dcterms:source <https://geoportal.madrid.es/IDEAM_WBGEOPORTAL/dataset.iam?id=00000010-b145-11ea-a01e-ecb1d753f6e8> .
+
+ex:AV_BarrioCentro a ex:ManagementBody ;
+  rdfs:label "Neighborhood Association of Centro District"@en ;
+  schema:url <https://madrid.es/> .
+
+ex:Cervantes_School_Garden a ex:SchoolGarden ;
+  rdfs:label "Cervantes School Garden"@en ;
+  ex:locatedIn ex:Retiro ;
+  ex:managedBy ex:IES_Cervantes ;
+  ex:waterSource ex:Tap ;
+  ex:hasAreaM2 "800"^^xsd:decimal ;
+  ex:hasPlots "18"^^xsd:integer ;
+  ex:hasInceptionYear "2019"^^xsd:gYear ;
+  wgs84:lat "40.4135"^^xsd:decimal ;
+  wgs84:long "-3.6830"^^xsd:decimal ;
+  dcterms:source <https://geoportal.madrid.es/IDEAM_WBGEOPORTAL/dataset.iam?id=00000010-b145-11ea-a01e-ecb1d753f6e8> .
+
+ex:IES_Cervantes a ex:ManagementBody ;
+  rdfs:label "Cervantes Secondary School"@en ;
+  schema:url <https://madrid.es/> .
+
+ex:CasaDeCampo_Garden a ex:MunicipalGarden ;
+  rdfs:label "Casa de Campo Municipal Garden"@en ;
+  ex:locatedIn ex:MoncloaAravaca ;
+  ex:managedBy ex:MadridCityCouncil ;
+  ex:waterSource ex:Tap ;
+  ex:hasAreaM2 "3500"^^xsd:decimal ;
+  ex:hasPlots "40"^^xsd:integer ;
+  ex:hasInceptionYear "2015"^^xsd:gYear ;
+  wgs84:lat "40.4179"^^xsd:decimal ;
+  wgs84:long "-3.7450"^^xsd:decimal ;
+  dcterms:source <https://geoportal.madrid.es/IDEAM_WBGEOPORTAL/dataset.iam?id=00000010-b145-11ea-a01e-ecb1d753f6e8> .
+
+ex:MadridCityCouncil a ex:ManagementBody ;
+  rdfs:label "Madrid City Council"@en ;
+  schema:url <https://www.madrid.es/> .
