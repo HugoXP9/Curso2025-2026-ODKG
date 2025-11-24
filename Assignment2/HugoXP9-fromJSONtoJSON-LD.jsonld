@@ -1,0 +1,59 @@
+{
+  "@context": {
+    "ex": "https://example.org/madrid-gardens#",
+    "schema": "http://schema.org/",
+    "wgs84": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "name": "schema:name",
+    "category": {
+      "@id": "@type",
+      "@type": "@vocab"
+    },
+    "district": {
+      "@id": "ex:locatedIn",
+      "@type": "@id"
+    },
+    "manager": {
+      "@id": "ex:managedBy",
+      "@type": "@id"
+    },
+    "area_m2": {
+      "@id": "ex:hasAreaM2",
+      "@type": "xsd:decimal"
+    },
+    "plots": {
+      "@id": "ex:hasPlots",
+      "@type": "xsd:integer"
+    },
+    "inception_year": {
+      "@id": "ex:hasInceptionYear",
+      "@type": "xsd:gYear"
+    },
+    "lat": "wgs84:lat",
+    "long": "wgs84:long",
+    "url": "schema:url"
+  },
+  "@id": "ex:Cervantes_School_Garden",
+  "category": "ex:SchoolGarden",
+  "name": "Cervantes School Garden",
+  "district": "ex:Retiro",
+  "manager": "ex:IES_Cervantes",
+  "area_m2": 800,
+  "plots": 18,
+  "inception_year": "2019",
+  "lat": 40.4135,
+  "long": -3.683,
+  "@included": [
+    {
+      "@id": "ex:IES_Cervantes",
+      "@type": "ex:ManagementBody",
+      "name": "Cervantes Secondary School",
+      "url": "https://madrid.es/"
+    },
+    {
+      "@id": "ex:Retiro",
+      "@type": "ex:District",
+      "name": "Retiro"
+    }
+  ]
+}

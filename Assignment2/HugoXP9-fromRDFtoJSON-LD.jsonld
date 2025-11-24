@@ -1,0 +1,387 @@
+{
+  "@context": {
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "schema": "http://schema.org/",
+    "wgs84": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "ex": "https://example.org/madrid-gardens#",
+    "label": "rdfs:label",
+    "comment": "rdfs:comment",
+    "subClassOf": "rdfs:subClassOf",
+    "domain": "rdfs:domain",
+    "range": "rdfs:range",
+    "lat": "wgs84:lat",
+    "long": "wgs84:long",
+    "locatedIn": "ex:locatedIn",
+    "managedBy": "ex:managedBy",
+    "waterSource": "ex:waterSource",
+    "hasAreaM2": {
+      "@id": "ex:hasAreaM2",
+      "@type": "xsd:decimal"
+    },
+    "hasPlots": {
+      "@id": "ex:hasPlots",
+      "@type": "xsd:integer"
+    },
+    "hasInceptionYear": {
+      "@id": "ex:hasInceptionYear",
+      "@type": "xsd:gYear"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "ex:",
+      "label": {
+        "@value": "Madrid Urban Gardens vocabulary",
+        "@language": "en"
+      },
+      "dcterms:description": {
+        "@value": "RDF/RDFS model for urban gardens in Madrid (community, school and municipal).",
+        "@language": "en"
+      },
+      "dcterms:source": "https://geoportal.madrid.es/IDEAM_WBGEOPORTAL/dataset.iam?id=00000010-b145-11ea-a01e-ecb1d753f6e8",
+      "dcterms:creator": "HugoXP9"
+    },
+    {
+      "@id": "ex:UrbanGarden",
+      "@type": "rdfs:Class",
+      "label": {
+        "@value": "Urban garden",
+        "@language": "en"
+      },
+      "comment": {
+        "@value": "Any urban garden located in the city of Madrid.",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "ex:CommunityGarden",
+      "@type": "rdfs:Class",
+      "label": {
+        "@value": "Community garden",
+        "@language": "en"
+      },
+      "comment": {
+        "@value": "Urban garden managed by neighborhood/community associations.",
+        "@language": "en"
+      },
+      "subClassOf": {
+        "@id": "ex:UrbanGarden"
+      }
+    },
+    {
+      "@id": "ex:SchoolGarden",
+      "@type": "rdfs:Class",
+      "label": {
+        "@value": "School garden",
+        "@language": "en"
+      },
+      "comment": {
+        "@value": "Urban garden hosted by a school.",
+        "@language": "en"
+      },
+      "subClassOf": {
+        "@id": "ex:UrbanGarden"
+      }
+    },
+    {
+      "@id": "ex:MunicipalGarden",
+      "@type": "rdfs:Class",
+      "label": {
+        "@value": "Municipal garden",
+        "@language": "en"
+      },
+      "comment": {
+        "@value": "Urban garden managed directly by the city council.",
+        "@language": "en"
+      },
+      "subClassOf": {
+        "@id": "ex:UrbanGarden"
+      }
+    },
+    {
+      "@id": "ex:District",
+      "@type": "rdfs:Class",
+      "label": {
+        "@value": "District",
+        "@language": "en"
+      },
+      "comment": {
+        "@value": "Administrative district of Madrid.",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "ex:ManagementBody",
+      "@type": "rdfs:Class",
+      "label": {
+        "@value": "Management body",
+        "@language": "en"
+      },
+      "comment": {
+        "@value": "Organization managing an urban garden (association, school, municipal unit).",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "ex:WaterSource",
+      "@type": "rdfs:Class",
+      "label": {
+        "@value": "Water source",
+        "@language": "en"
+      },
+      "comment": {
+        "@value": "Type of water source used for irrigation (tap, well, etc.).",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "ex:locatedIn",
+      "@type": "rdf:Property",
+      "label": {
+        "@value": "located in",
+        "@language": "en"
+      },
+      "domain": {
+        "@id": "ex:UrbanGarden"
+      },
+      "range": {
+        "@id": "ex:District"
+      }
+    },
+    {
+      "@id": "ex:managedBy",
+      "@type": "rdf:Property",
+      "label": {
+        "@value": "managed by",
+        "@language": "en"
+      },
+      "domain": {
+        "@id": "ex:UrbanGarden"
+      },
+      "range": {
+        "@id": "ex:ManagementBody"
+      }
+    },
+    {
+      "@id": "ex:waterSource",
+      "@type": "rdf:Property",
+      "label": {
+        "@value": "water source",
+        "@language": "en"
+      },
+      "domain": {
+        "@id": "ex:UrbanGarden"
+      },
+      "range": {
+        "@id": "ex:WaterSource"
+      }
+    },
+    {
+      "@id": "ex:hasAreaM2",
+      "@type": "rdf:Property",
+      "label": {
+        "@value": "area (m2)",
+        "@language": "en"
+      },
+      "domain": {
+        "@id": "ex:UrbanGarden"
+      },
+      "range": "xsd:decimal"
+    },
+    {
+      "@id": "ex:hasPlots",
+      "@type": "rdf:Property",
+      "label": {
+        "@value": "number of plots",
+        "@language": "en"
+      },
+      "domain": {
+        "@id": "ex:UrbanGarden"
+      },
+      "range": "xsd:integer"
+    },
+    {
+      "@id": "ex:hasInceptionYear",
+      "@type": "rdf:Property",
+      "label": {
+        "@value": "inception year",
+        "@language": "en"
+      },
+      "domain": {
+        "@id": "ex:UrbanGarden"
+      },
+      "range": "xsd:gYear"
+    },
+    {
+      "@id": "wgs84:lat",
+      "@type": "rdf:Property",
+      "label": {
+        "@value": "latitude",
+        "@language": "en"
+      },
+      "domain": {
+        "@id": "ex:UrbanGarden"
+      },
+      "range": "xsd:decimal"
+    },
+    {
+      "@id": "wgs84:long",
+      "@type": "rdf:Property",
+      "label": {
+        "@value": "longitude",
+        "@language": "en"
+      },
+      "domain": {
+        "@id": "ex:UrbanGarden"
+      },
+      "range": "xsd:decimal"
+    },
+    {
+      "@id": "ex:Tap",
+      "@type": "ex:WaterSource",
+      "label": {
+        "@value": "Tap/Network",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "ex:Well",
+      "@type": "ex:WaterSource",
+      "label": {
+        "@value": "Well",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "ex:Fountain",
+      "@type": "ex:WaterSource",
+      "label": {
+        "@value": "Public fountain",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "ex:Centro",
+      "@type": "ex:District",
+      "label": {
+        "@value": "Centro",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "ex:Retiro",
+      "@type": "ex:District",
+      "label": {
+        "@value": "Retiro",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "ex:MoncloaAravaca",
+      "@type": "ex:District",
+      "label": {
+        "@value": "Moncloa-Aravaca",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "ex:AV_BarrioCentro",
+      "@type": "ex:ManagementBody",
+      "schema:url": "https://madrid.es/",
+      "label": {
+        "@value": "Neighborhood Association of Centro District",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "ex:IES_Cervantes",
+      "@type": "ex:ManagementBody",
+      "schema:url": "https://madrid.es/",
+      "label": {
+        "@value": "Cervantes Secondary School",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "ex:MadridCityCouncil",
+      "@type": "ex:ManagementBody",
+      "schema:url": "https://www.madrid.es/",
+      "label": {
+        "@value": "Madrid City Council",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "ex:EsteOeste_Garden",
+      "@type": "ex:CommunityGarden",
+      "label": {
+        "@value": "Este-Oeste Community Garden",
+        "@language": "en"
+      },
+      "locatedIn": {
+        "@id": "ex:Centro"
+      },
+      "managedBy": {
+        "@id": "ex:AV_BarrioCentro"
+      },
+      "waterSource": {
+        "@id": "ex:Fountain"
+      },
+      "hasAreaM2": 1200,
+      "hasPlots": 25,
+      "hasInceptionYear": "2017",
+      "lat": 40.4167,
+      "long": -3.7033,
+      "dcterms:source": "https://geoportal.madrid.es/IDEAM_WBGEOPORTAL/dataset.iam?id=00000010-b145-11ea-a01e-ecb1d753f6e8"
+    },
+    {
+      "@id": "ex:Cervantes_School_Garden",
+      "@type": "ex:SchoolGarden",
+      "label": {
+        "@value": "Cervantes School Garden",
+        "@language": "en"
+      },
+      "locatedIn": {
+        "@id": "ex:Retiro"
+      },
+      "managedBy": {
+        "@id": "ex:IES_Cervantes"
+      },
+      "waterSource": {
+        "@id": "ex:Tap"
+      },
+      "hasAreaM2": 800,
+      "hasPlots": 18,
+      "hasInceptionYear": "2019",
+      "lat": 40.4135,
+      "long": -3.683,
+      "dcterms:source": "https://geoportal.madrid.es/IDEAM_WBGEOPORTAL/dataset.iam?id=00000010-b145-11ea-a01e-ecb1d753f6e8"
+    },
+    {
+      "@id": "ex:CasaDeCampo_Garden",
+      "@type": "ex:MunicipalGarden",
+      "label": {
+        "@value": "Casa de Campo Municipal Garden",
+        "@language": "en"
+      },
+      "locatedIn": {
+        "@id": "ex:MoncloaAravaca"
+      },
+      "managedBy": {
+        "@id": "ex:MadridCityCouncil"
+      },
+      "waterSource": {
+        "@id": "ex:Tap"
+      },
+      "hasAreaM2": 3500,
+      "hasPlots": 40,
+      "hasInceptionYear": "2015",
+      "lat": 40.4179,
+      "long": -3.745,
+      "dcterms:source": "https://geoportal.madrid.es/IDEAM_WBGEOPORTAL/dataset.iam?id=00000010-b145-11ea-a01e-ecb1d753f6e8"
+    }
+  ]
+}
